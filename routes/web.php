@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Middleware\SetLocale;
 
 // Public routes
 Route::get('/', function () {
@@ -15,13 +16,14 @@ Auth::routes();
 
 // Language switcher route
 Route::get('language/{locale}', function ($locale) {
-    app()->setLocale($locale);
-    session()->put('locale', $locale);
+    if (in_array($locale, ['en', 'el'])) {
+        session()->put('locale', $locale);
+    }
     return redirect()->back();
 })->name('language');
 
 // Protected routes
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', SetLocale::class])->group(function () {
     // Home route
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
