@@ -18,5 +18,9 @@
     "Manage Roles": "Manage Roles",
     "Dashboard": "Dashboard",
     "You are logged in!": "You are logged in!",
-    "Submit": "Submit"
+    "Submit": "Submit",
+    "Are you sure?": "Are you sure?",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "Create New Role": "Create New Role"
 }
