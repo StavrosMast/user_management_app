@@ -1,0 +1,22 @@
+{
+    "Users": "Users",
+    "Roles": "Roles",
+    "Create User": "Create User",
+    "Edit User": "Edit User",
+    "Delete User": "Delete User",
+    "Create Role": "Create Role",
+    "Edit Role": "Edit Role",
+    "Delete Role": "Delete Role",
+    "Name": "Name",
+    "Email": "Email",
+    "Password": "Password",
+    "Actions": "Actions",
+    "Logout": "Logout",
+    "Register": "Register",
+    "Login": "Login",
+    "Manage Users": "Manage Users",
+    "Manage Roles": "Manage Roles",
+    "Dashboard": "Dashboard",
+    "You are logged in!": "You are logged in!",
+    "Submit": "Submit"
+}

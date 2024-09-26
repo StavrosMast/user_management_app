@@ -1,0 +1,22 @@
+{
+    "Users": "Χρήστες",
+    "Roles": "Ρόλοι",
+    "Create User": "Δημιουργία Χρήστη",
+    "Edit User": "Επεξεργασία Χρήστη",
+    "Delete User": "Διαγραφή Χρήστη",
+    "Create Role": "Δημιουργία Ρόλου",
+    "Edit Role": "Επεξεργασία Ρόλου",
+    "Delete Role": "Διαγραφή Ρόλου",
+    "Name": "Όνομα",
+    "Email": "Email",
+    "Password": "Κωδικός",
+    "Actions": "Ενέργειες",
+    "Logout": "Αποσύνδεση",
+    "Register": "Εγγραφή",
+    "Login": "Σύνδεση",
+    "Manage Users": "Διαχείριση Χρηστών",
+    "Manage Roles": "Διαχείριση Ρόλων",
+    "Dashboard": "Πίνακας ελέγχου",
+    "You are logged in!": "Είστε συνδεδεμένος!",
+    "Submit": "Υποβολή"
+}
