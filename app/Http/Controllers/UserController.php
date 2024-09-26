@@ -20,42 +20,6 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|email|unique:users',
-    //         'password' => 'required|string|min:8',
-    //         'roles' => 'required|array',
-    //         'roles.*' => 'exists:roles,id',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return response()->json(['errors' => $validator->errors()], 422);
-    //     }
-
-    //     DB::beginTransaction();
-    //     try {
-    //         $user = User::create([
-    //             'name' => $request->name,
-    //             'email' => $request->email,
-    //             'password' => Hash::make($request->password),
-    //         ]);
-
-    //         $user->roles()->attach($request->roles);
-
-    //         DB::commit();
-    //         return response()->json(['message' => 'User created successfully'], 201);
-    //     } catch (\Exception $e) {
-    //         DB::rollBack();
-    //         return response()->json(['message' => 'Failed to create user', 'error' => $e->getMessage()], 500);
-    //     }
-    // }
-
-
     public function store(Request $request)
 {
     $validated = $request->validate([

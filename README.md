@@ -1,66 +1,85 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# User and Role Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This Laravel application provides a comprehensive system for managing users and roles with full CRUD functionality. It's built using Laravel 8+ and follows the MVC architecture.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. User Management
+   - Create, Read, Update, and Delete users
+   - Assign multiple roles to users
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+2. Role Management
+   - Create, Read, Update, and Delete roles
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+3. Authentication
+   - Login and Registration functionality
+   - Protected routes accessible only to authenticated users
 
-## Learning Laravel
+4. Multilingual Support
+   - Supports English and Greek languages
+   - Easy language switching
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+5. Responsive Design
+   - Built with Bootstrap for a mobile-friendly interface
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+6. Security
+   - CSRF protection
+   - Password hashing
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Requirements and Implementation
 
-## Laravel Sponsors
+1. MVC Architecture
+   - Models: `app/Models/User.php` and `app/Models/Role.php`
+   - Views: `resources/views/users/` and `resources/views/roles/`
+   - Controllers: `app/Http/Controllers/UserController.php` and `app/Http/Controllers/RoleController.php`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2. Laravel Tools
+   - Form creation: Blade templates in `resources/views/users/form.blade.php` and `resources/views/roles/form.blade.php`
+   - Database Interaction: Eloquent ORM used in controllers
+   - Migrations: `database/migrations/`
+   - Validation: Server-side validation in controllers
 
-### Premium Partners
+3. Client-side Validation
+   - Implemented in `resources/js/app.js`
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+4. AJAX Requests
+   - Example implementation in `resources/js/app.js`
 
-## Contributing
+5. Bootstrap Frontend
+   - Used throughout the views
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+6. Error Handling
+   - Flash messages implemented in controllers and displayed in views
 
-## Code of Conduct
+7. Database Transactions
+   - Implemented in UserController and RoleController for critical operations
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+8. Multilingual Support
+   - Language files: `resources/lang/en.json` and `resources/lang/el.json`
+   - Language switcher in `resources/views/layouts/app.blade.php`
 
-## Security Vulnerabilities
+9. Authentication
+   - Laravel's built-in authentication system
+   - Protected routes in `routes/web.php`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+10. Password Security
+    - Hashing implemented in `app/Models/User.php`
 
-## License
+11. Middleware
+    - Custom SetLocale middleware in `app/Http/Middleware/SetLocale.php`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Installation
+
+1. Clone the repository
+2. Run `composer install`
+3. Copy `.env.example` to `.env` and configure your database
+4. Run `php artisan key:generate`
+5. Run `php artisan migrate`
+6. Run `php artisan db:seed` (if seeders are provided)
+7. Run `npm install && npm run dev`
+
+## Usage
+
+1. Register a new user or login with existing credentials
+2. Navigate through the dashboard to manage users and roles
+3. Use the language switcher in the navbar to change the interface language
