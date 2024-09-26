@@ -17,73 +17,99 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('roles')->get();
-        return response()->json($users);
+        return view('users.index', compact('users'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'name' => 'required|string|max:255',
+    //         'email' => 'required|email|unique:users',
+    //         'password' => 'required|string|min:8',
+    //         'roles' => 'required|array',
+    //         'roles.*' => 'exists:roles,id',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return response()->json(['errors' => $validator->errors()], 422);
+    //     }
+
+    //     DB::beginTransaction();
+    //     try {
+    //         $user = User::create([
+    //             'name' => $request->name,
+    //             'email' => $request->email,
+    //             'password' => Hash::make($request->password),
+    //         ]);
+
+    //         $user->roles()->attach($request->roles);
+
+    //         DB::commit();
+    //         return response()->json(['message' => 'User created successfully'], 201);
+    //     } catch (\Exception $e) {
+    //         DB::rollBack();
+    //         return response()->json(['message' => 'Failed to create user', 'error' => $e->getMessage()], 500);
+    //     }
+    // }
+
+
     public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:8',
-            'roles' => 'required|array',
-            'roles.*' => 'exists:roles,id',
-        ]);
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:unique:users',
+        'password' => 'required|string|min:8',
+        'roles' => 'required|array',
+        'roles.*' => 'exists:roles,id',
+    ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
+    $user = User::create([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'password' => Hash::make($validated['password']),
+    ]);
 
-        DB::beginTransaction();
-        try {
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
+    $user->roles()->attach($validated['roles']);
 
-            $user->roles()->attach($request->roles);
+    return redirect()->route('users.index')->with('success', 'User created successfully');
+}
 
-            DB::commit();
-            return response()->json(['message' => 'User created successfully'], 201);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['message' => 'Failed to create user', 'error' => $e->getMessage()], 500);
-        }
+public function update(Request $request, User $user)
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+        'password' => 'nullable|string|min:8',
+        'roles' => 'required|array',
+        'roles.*' => 'exists:roles,id',
+    ]);
+
+    $user->update([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+    ]);
+
+    if ($validated['password']) {
+        $user->update(['password' => Hash::make($validated['password'])]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    $user->roles()->sync($validated['roles']);
+
+    return redirect()->route('users.index')->with('success', 'User updated successfully');
+}
+
+    public function create()
     {
-        //
+        $roles = Role::all();
+        return view('users.form', compact('roles'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $roles = Role::all();
+        return view('users.form', compact('user', 'roles'));
     }
 }

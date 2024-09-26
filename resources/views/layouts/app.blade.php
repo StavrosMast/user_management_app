@@ -67,6 +67,16 @@
                                 </div>
                             </li>
                         @endguest
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ strtoupper(app()->getLocale()) }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('language', 'en') }}">EN</a></li>
+                                <li><a class="dropdown-item" href="{{ route('language', 'el') }}">EL</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -75,6 +85,18 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
     </div>
 </body>
 </html>
