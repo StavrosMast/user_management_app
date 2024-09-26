@@ -60,7 +60,7 @@ class UserController extends Controller
 {
     $validated = $request->validate([
         'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:unique:users',
+        'email' => 'required|string|email|max:255|unique:users',
         'password' => 'required|string|min:8',
         'roles' => 'required|array',
         'roles.*' => 'exists:roles,id',
@@ -111,5 +111,28 @@ public function update(Request $request, User $user)
     {
         $roles = Role::all();
         return view('users.form', compact('user', 'roles'));
+    }
+
+    public function destroy(User $user)
+    {
+        try {
+            // Begin a database transaction
+            DB::beginTransaction();
+
+            // Detach all roles associated with the user
+            $user->roles()->detach();
+
+            // Delete the user
+            $user->delete();
+
+            // Commit the transaction
+            DB::commit();
+
+            return redirect()->route('users.index')->with('success', 'User deleted successfully');
+        } catch (\Exception $e) {
+            // If an error occurs, rollback the transaction
+            DB::rollBack();
+            return redirect()->route('users.index')->with('error', 'Failed to delete user: ' . $e->getMessage());
+        }
     }
 }
